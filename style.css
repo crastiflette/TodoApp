@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #1e3184, #2c7d70);
+
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+#title {
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+}
+
+/* --- Container du haut : input + bouton --- */
+#container {
+    width: 420px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;          /* input et bouton côte à côte */
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+#taskInput {
+    flex: 1;                /* prend tout l'espace disponible */
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #555;
+}
+
+#addTaskButton {
+    background-color: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* --- Container du bas : liste des tâches --- */
+#taskList {
+    width: 420px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column; /* items empilés verticalement */
+    gap: 5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    align-items: left; /* alignement à gauche pour les tâches */
+}
+
+#taskTitle {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    align-self: flex-start; /* titre aligné à gauche */
+    padding: 16px 0px 0px 0px;
+}
+
+/* --- Chaque ligne de tâche --- */
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0; /* séparateur discret */
+}
+
+.task-item:last-child {
+    border-bottom: none; /* pas de trait sur le dernier */
+}
+
+/* --- Checkbox ronde custom --- */
+.task-checkbox {
+    appearance: none;          /* cache la checkbox native */
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;        /* forme ronde */
+    border: 2px solid #ccc;
+    cursor: pointer;
+    flex-shrink: 0;            /* ne rétrécit pas */
+}
+
+.task-checkbox:checked {
+    background-color: #e8603c; /* orange/rouge comme sur la photo */
+    border-color: #e8603c;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5l3 4L11 1' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* --- Texte de la tâche --- */
+.task-text {
+    flex: 1;                   /* prend tout l'espace */
+    font-size: 15px;
+    color: #333;
+    transition: all 0.2s;
+    padding-left: 10px;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #aaa;               /* grisé quand complété */
+}
+
+/* --- Bouton supprimer --- */
+.delete-btn {
+    background: none;
+    border: none;
+    color: #bbb;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 5px;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover {
+    color: #e8603c;            /* devient rouge au survol */
+}
