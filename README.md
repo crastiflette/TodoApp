@@ -24,7 +24,7 @@ Une application web simple et responsive pour gérer ses tâches du quotidien, i
 
 ## Démo
 
-🔗 [Ouvrir l'application](https://TON-PSEUDO.github.io/todo-app)
+🔗 [Ouvrir l'application](https://crastiflette.github.io/todo-app)
 
 ---
 
