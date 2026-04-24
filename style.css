@@ -23,7 +23,7 @@ body {
 
 /* --- Container du haut : input + bouton --- */
 #container {
-    width: 420px, 70%;
+    width: 420px, 60%;
     background-color: white;
     border-radius: 15px;
     padding: 20px;
@@ -46,7 +46,6 @@ body {
     outline: none;
     font-size: 16px;
     cursor: pointer;
-    width: 20px;        /* réduit la largeur pour cacher le texte */
     overflow: hidden;   /* cache ce qui dépasse */
 }
 
@@ -62,7 +61,7 @@ body {
 
 /* --- Container du bas : liste des tâches --- */
 #taskList {
-    width: 420px, 70%;
+    width: 420px, 60%;
     background-color: white;
     border-radius: 15px;
     padding: 10px 20px;
