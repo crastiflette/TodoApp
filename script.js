@@ -1,6 +1,11 @@
 const addTaskButton = document.getElementById('addTaskButton');
 const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
+const dateInput = document.getElementById('dateInput');
+
+// Au lancement mettre par defaut la date actuel
+const dateControl = document.querySelector('input[type="date"]')
+dateControl.value = new Date().toISOString().split('T')[0];
 
 // Sauvegarde toutes les tâches dans le localStorage
 const saveTasks = () => {
@@ -9,6 +14,7 @@ const saveTasks = () => {
         tasks.push({
             id: item.dataset.id,
             text: item.querySelector('.task-text').innerText,
+            date: item.querySelector('.task-date').innerText,
             completed: item.classList.contains('completed')
         });
     });
@@ -20,6 +26,7 @@ const createTaskElement = (task) => {
     const taskItem = document.createElement('div');
     const checkbox = document.createElement('input');
     const text = document.createElement('span');
+    const date = document.createElement('span');
     const deleteBtn = document.createElement('button');
 
     taskItem.classList.add('task-item');
@@ -32,6 +39,9 @@ const createTaskElement = (task) => {
 
     text.classList.add('task-text');
     text.innerText = task.text;
+
+    date.classList.add('task-date')
+    date.innerText = task.date || ''
 
     deleteBtn.classList.add('delete-btn');
     deleteBtn.innerText = 'x';
@@ -48,6 +58,7 @@ const createTaskElement = (task) => {
 
     taskItem.appendChild(checkbox);
     taskItem.appendChild(text);
+    taskItem.appendChild(date);
     taskItem.appendChild(deleteBtn);
     taskList.appendChild(taskItem);
 };
@@ -56,6 +67,13 @@ const createTaskElement = (task) => {
 const loadTasks = () => {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     document.querySelectorAll('.task-item').forEach(item => item.remove());
+
+    tasks.sort((a, b) => {
+        if (a.date < b.date) return -1;
+        if (a.date > b.date) return 1;
+        return 0;
+    });
+
     tasks.forEach(task => createTaskElement(task));
 };
 
@@ -65,11 +83,12 @@ addTaskButton.addEventListener('click', () => {
         const task = {
             id: Date.now(),         // id unique basé sur le temps
             text: taskInput.value.trim(),
+            date: dateInput.value,
             completed: false
         };
         createTaskElement(task);
         saveTasks(); // sauvegarde après ajout
-        taskInput.value = '';
+        loadTasks(); // recharge pour trier
     }
 });
 
