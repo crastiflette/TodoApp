@@ -3,9 +3,6 @@ const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 const dateInput = document.getElementById('dateInput');
 
-document.getElementById('calendarIcon').addEventListener('click', () => {
-    dateInput.showPicker();
-});
 
 // Au lancement mettre par defaut la date actuel
 const dateControl = document.querySelector('input[type="date"]')
