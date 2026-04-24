@@ -63,7 +63,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 100;        /* invisible mais cliquable */
+    opacity: 0;        /* invisible mais cliquable */
     cursor: pointer;
     /* font-size: 40px; */
 }
