@@ -90,6 +90,7 @@ addTaskButton.addEventListener('click', () => {
         createTaskElement(task);
         saveTasks(); // sauvegarde après ajout
         loadTasks(); // recharge pour trier
+        taskInput.value = ''
     }
 });
 
