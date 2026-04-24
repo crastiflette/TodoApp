@@ -63,7 +63,7 @@ body {
     height: 100%;
     opacity: 0;        /* invisible mais cliquable */
     cursor: pointer;
-    font-size: 40px;
+    /*font-size: 40px;*/
 }
 
 #addTaskButton {
