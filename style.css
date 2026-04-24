@@ -41,6 +41,15 @@ body {
     color: #555;
 }
 
+#dateInput {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 20px;        /* réduit la largeur pour cacher le texte */
+    overflow: hidden;   /* cache ce qui dépasse */
+}
+
 #addTaskButton {
     background-color: #7c3aed;
     color: white;
@@ -111,11 +120,19 @@ body {
     color: #333;
     transition: all 0.2s;
     padding-left: 10px;
+    padding-right: 30px;
 }
 
 .task-item.completed .task-text {
     text-decoration: line-through;
     color: #aaa;               /* grisé quand complété */
+}
+
+.task-date {
+    font-size: 12px;
+    color: #aaa;
+    margin-right: 10px;
+    white-space: nowrape;
 }
 
 /* --- Bouton supprimer --- */
