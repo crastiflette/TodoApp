@@ -55,6 +55,7 @@ const createTaskElement = (task) => {
     deleteBtn.addEventListener('click', () => {
         taskItem.remove();
         saveTasks(); // sauvegarde après suppression
+        loadTasks(); // recharge pour trier
     });
 
     taskItem.appendChild(checkbox);
@@ -68,6 +69,7 @@ const createTaskElement = (task) => {
 const loadTasks = () => {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     document.querySelectorAll('.task-item').forEach(item => item.remove());
+    document.querySelectorAll('.dateTitle').forEach(item => item.remove());
 
     tasks.sort((a, b) => {
         if (a.date < b.date) return -1;
@@ -75,7 +77,27 @@ const loadTasks = () => {
         return 0;
     });
 
-    tasks.forEach(task => createTaskElement(task));
+    const groupes = {};
+
+    tasks.forEach(task => {
+        if (!groupes[task.date]) {
+            groupes[task.date] = []; // crée le groupe si il n'existe pas
+        }
+        groupes[task.date].push(task); // ajoute la tâche dans son groupe
+    });
+    console.log(groupes);
+
+    for (let i = 0; i < Object.keys(groupes).length; i++) {
+        const date = Object.keys(groupes)[i];
+        const dateTitle = document.createElement('h3');
+
+        dateTitle.classList.add('dateTitle');
+        dateTitle.innerText = date;
+
+        taskList.appendChild(dateTitle);
+        groupes[date].forEach(task => createTaskElement(task));
+    }
+    
 };
 
 // Ajoute une tâche
@@ -90,7 +112,7 @@ addTaskButton.addEventListener('click', () => {
         createTaskElement(task);
         saveTasks(); // sauvegarde après ajout
         loadTasks(); // recharge pour trier
-        taskInput.value = ''
+        taskInput.value = ''; // reset input
     }
 });
 
