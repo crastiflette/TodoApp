@@ -15,7 +15,7 @@ const saveTasks = () => {
         tasks.push({
             id: item.dataset.id,
             text: item.querySelector('.task-text').innerText,
-            date: item.querySelector('.task-date').innerText,
+            date: item.dataset.date,
             completed: item.classList.contains('completed')
         });
     });
@@ -27,11 +27,11 @@ const createTaskElement = (task) => {
     const taskItem = document.createElement('div');
     const checkbox = document.createElement('input');
     const text = document.createElement('span');
-    const date = document.createElement('span');
     const deleteBtn = document.createElement('button');
 
     taskItem.classList.add('task-item');
     taskItem.dataset.id = task.id;
+    taskItem.dataset.date = task.date;
     if (task.completed) taskItem.classList.add('completed');
 
     checkbox.type = 'checkbox';
@@ -40,9 +40,6 @@ const createTaskElement = (task) => {
 
     text.classList.add('task-text');
     text.innerText = task.text;
-
-    date.classList.add('task-date')
-    date.innerText = task.date || ''
 
     deleteBtn.classList.add('delete-btn');
     deleteBtn.innerText = 'x';
@@ -60,7 +57,6 @@ const createTaskElement = (task) => {
 
     taskItem.appendChild(checkbox);
     taskItem.appendChild(text);
-    taskItem.appendChild(date);
     taskItem.appendChild(deleteBtn);
     taskList.appendChild(taskItem);
 };
