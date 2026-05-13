@@ -95,6 +95,7 @@ const loadTasks = () => {
         dateTitle.innerText = date;
 
         taskGroup.classList.add('task-group');
+        taskGroup.dataset.date = date; // stocke la date dans le groupe
 
         taskList.appendChild(dateTitle);
         taskList.appendChild(taskGroup);
@@ -103,7 +104,21 @@ const loadTasks = () => {
         // ← ajoute ça
         Sortable.create(taskGroup, {
             animation: 150,
-            onEnd: () => saveTasks()
+            group: 'shared',
+            onEnd: (event) => {
+                const ancienGroupe = event.from;
+                const nouveauGroupe = event.to;
+                const nouvelleDate = nouveauGroupe.dataset.date;
+                const tache = event.item;
+                tache.dataset.date = nouvelleDate;  // met à jour la date
+                saveTasks();
+
+                // Supprime le groupe source s'il est vide
+                if (ancienGroupe.querySelectorAll('.task-item').length === 0) {
+                    ancienGroupe.previousElementSibling.remove(); // supprime le dateTitle
+                    ancienGroupe.remove();
+                }
+            }
         });
     }
     
