@@ -2,6 +2,7 @@ const addTaskButton = document.getElementById('addTaskButton');
 const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 const dateInput = document.getElementById('dateInput');
+const deleteImage = 'delete.png';
 
 
 // Au lancement mettre par defaut la date actuel
@@ -30,6 +31,7 @@ const createTaskElement = (task, parent = taskList) => {
     const checkbox = document.createElement('input');
     const text = document.createElement('span');
     const deleteBtn = document.createElement('button');
+    const deleteIcon = document.createElement('img');
 
     taskItem.classList.add('task-item');
     taskItem.dataset.id = task.id;
@@ -44,7 +46,10 @@ const createTaskElement = (task, parent = taskList) => {
     text.innerText = task.text;
 
     deleteBtn.classList.add('delete-btn');
-    deleteBtn.innerText = 'x';
+    deleteIcon.id = 'deleteIcon';
+    deleteIcon.src = deleteImage;
+    deleteIcon.alt = 'Supprimer';
+    deleteBtn.appendChild(deleteIcon);
 
     checkbox.addEventListener('change', () => {
         taskItem.classList.toggle('completed');
